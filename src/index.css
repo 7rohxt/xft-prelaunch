@@ -1,0 +1,190 @@
+/* Xing Fu Tang pre-launch — polished mobile campaign landing page.
+   Cormorant + Manrope · warm cream ground · caramel accent · brand green.
+   Consistent spacing system; tuned for iPhone 14 Pro / modern mobile. */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #FBF4EE;            /* warm cream page */
+  --card: #FDF9F3;          /* form card — softer than white, lighter than page */
+  --offer-bg: #FFFDF9;      /* offer card — very subtle warm off-white */
+  --ink: #26201A;           /* primary text / headline */
+  --body: #514738;          /* secondary body text */
+  --muted: #9A8C78;         /* tertiary / captions */
+  --placeholder: #B7A88E;
+  --caramel: #B0782E;       /* "sweet", divider */
+  --green: #82AC3C;         /* gradient top */
+  --green-dark: #719932;    /* mascot green — CTA + offer icon */
+  --green-pale: #EBF3DE;    /* offer icon badge */
+  --gold: #7A5B3E;
+  --border: #ECE3D5;
+  --input-border: #E5DCCC;
+  --chip: #F1EADD;
+  --shadow-card: 0 6px 22px rgba(120, 90, 45, .07);
+  --shadow-green: 0 8px 18px rgba(113, 153, 50, .30);
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans: "Manrope", system-ui, -apple-system, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; min-height: 100%; }
+body {
+  font-family: var(--sans); color: var(--body);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-shell { min-height: 100vh; min-height: 100dvh; display: flex; justify-content: center; }
+.screen {
+  position: relative;
+  width: 100%; max-width: 440px; min-height: 100dvh;
+  padding: 14px 20px calc(16px + env(safe-area-inset-bottom));
+  display: flex; flex-direction: column;
+}
+
+/* ---------- logo (decoupled — pinned to the page's top-left) ---------- */
+.brand-logo { position: absolute; top: 16px; left: 20px; height: 50px; z-index: 5; }
+
+/* ---------- hero (shrunk, softened, sits a little lower) ---------- */
+.hero-wrap { width: 100%; max-width: 272px; margin: 44px auto 0; }
+.hero-wrap .hero { width: 100%; display: block; filter: saturate(0.82); }
+
+/* ---------- headline ---------- */
+.hero-title {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(25px, 7vw, 34px); line-height: 1.08;
+  text-align: center; color: var(--ink); margin: 4px 0 0; text-wrap: balance;
+}
+.hero-title em { font-style: italic; color: var(--caramel); }
+
+/* ---------- divider ---------- */
+.rule { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 1px 0 1px; }
+.rule .ln { width: 46px; height: 1px; background: var(--caramel); opacity: .4; }
+.rule .dots { color: var(--caramel); font-size: 11px; letter-spacing: 5px; line-height: 1; opacity: .85; }
+
+/* ---------- location ---------- */
+.hero-sub { text-align: center; color: var(--muted); font-size: 14px; margin: 0; }
+
+/* ---------- offer card ---------- */
+.offer {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; gap: 13px;
+  background: linear-gradient(140deg, #5A3A1E, #331F0F); border: 1px solid #6E4A28; border-radius: 18px;
+  padding: 12px 14px; margin: 12px 0 0;
+  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 240, 215, .10);
+  transform-origin: center;
+  animation: offer-pulse 1.9s ease-in-out infinite;
+}
+@keyframes offer-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+/* moving shine across the brown-sugar card */
+.offer::after {
+  content: ""; position: absolute; top: 0; left: -60%; width: 45%; height: 100%; z-index: 0;
+  background: linear-gradient(100deg, transparent, rgba(255, 238, 205, .22), transparent);
+  transform: skewX(-18deg); pointer-events: none;
+  animation: offer-shine 2.3s ease-in-out infinite;
+}
+@keyframes offer-shine { 0% { left: -60%; } 50%, 100% { left: 135%; } }
+.offer-ic {
+  position: relative; z-index: 1;
+  width: 40px; height: 40px; flex: 0 0 auto; border-radius: 50%;
+  background: rgba(240, 196, 102, .16); color: #F1C568;
+  display: flex; align-items: center; justify-content: center;
+}
+.offer-ic svg { width: 21px; height: 21px; display: block; }
+.offer-txt { position: relative; z-index: 1; flex: 1; min-width: 0; border-left: 1px dashed rgba(255, 235, 200, .28); padding-left: 13px; }
+.offer-title { display: block; font-size: 15px; font-weight: 700; letter-spacing: -.006em; color: #F8EEDB; line-height: 1.2; }
+.offer-sub { display: block; font-size: 12.5px; font-weight: 500; letter-spacing: .005em; color: #D6C4A6; margin-top: 3px; }
+.offer-fine { display: block; font-size: 11.5px; color: #B7A488; margin-top: 2px; }
+
+/* ---------- form card ---------- */
+.card {
+  position: relative;
+  background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+  padding: 15px 16px; margin: 16px 0 0; box-shadow: var(--shadow-card);
+  display: flex; flex-direction: column; gap: 12px;
+}
+/* Early Bird badge — straddles the top-right edge of the form card */
+.eyebrow {
+  position: absolute; top: 0; right: 16px; transform: translateY(-50%);
+  font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  color: #8A5F22; background: linear-gradient(135deg, #FBF3E3, #F3E7CE);
+  border: 1px solid #EAD9B8;
+  padding: 6px 13px; border-radius: 999px; white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(120, 90, 40, .16);
+}
+.frow { display: flex; gap: 10px; align-items: center; }
+.chip {
+  width: 30px; height: 30px; flex: 0 0 auto; border-radius: 50%;
+  background: var(--chip); color: #6E6656;
+  display: flex; align-items: center; justify-content: center;
+}
+.chip svg { width: 15px; height: 15px; display: block; }
+.fcol { flex: 1; min-width: 0; }
+.label {
+  display: block; font-size: 10px; font-weight: 800; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink); margin-bottom: 5px;
+}
+.label .opt { color: var(--muted); font-weight: 700; }
+.input {
+  width: 100%; height: 42px; padding: 0 12px; font-family: var(--sans); font-size: 14px;
+  border: 1px solid var(--input-border); border-radius: 10px; background: #fff; color: var(--ink);
+}
+.input::placeholder { color: var(--placeholder); }
+.input:focus { outline: none; border-color: var(--green-dark); box-shadow: 0 0 0 3px rgba(113, 153, 50, .16); }
+.phone-row { display: flex; gap: 9px; }
+.cc {
+  width: 66px; flex: 0 0 auto; height: 42px; padding: 0 9px;
+  border: 1px solid var(--input-border); border-radius: 10px; background: #fff;
+  font-family: var(--sans); font-size: 14px; font-weight: 700; color: var(--ink);
+}
+.cc:focus { outline: none; border-color: var(--green-dark); }
+.phone-row .input { flex: 1; }
+.err { color: #B4432E; font-size: 12.5px; margin: 7px 0 0; }
+
+/* ---------- CTA ---------- */
+.btn {
+  margin-top: 3px; width: 100%; height: 52px; border: none; border-radius: 14px;
+  font-family: var(--sans); font-size: 15px; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  box-shadow: var(--shadow-green); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:disabled { opacity: .55; box-shadow: none; cursor: not-allowed; }
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 20px; height: 20px; }
+
+.privacy { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 11px; color: var(--muted); margin: 12px 0 0; text-align: center; }
+.privacy svg { width: 13px; height: 13px; flex: 0 0 auto; }
+
+.foot { text-align: center; font-size: 11px; color: var(--muted); margin-top: 16px; letter-spacing: .02em; }
+.spacer { flex: 1; min-height: 10px; }
+
+/* ---------- success modal ---------- */
+.sheet-overlay {
+  position: fixed; inset: 0; background: rgba(21, 19, 15, .45);
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 22px calc(22px + env(safe-area-inset-right)) calc(22px + env(safe-area-inset-bottom)) calc(22px + env(safe-area-inset-left));
+  z-index: 100; animation: fade .2s ease;
+}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.modal {
+  width: 100%; max-width: 400px; background: var(--card); border-radius: 22px;
+  padding: 28px 24px 24px; text-align: center; box-shadow: 0 30px 70px rgba(40, 30, 15, .4);
+  animation: pop .26s cubic-bezier(.2, .9, .3, 1.2);
+}
+@keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: none; } }
+.modal-mascot { display: block; width: 116px; height: auto; margin: -4px auto 6px; filter: drop-shadow(0 8px 12px rgba(80, 64, 36, .22)); }
+.modal h2 { font-family: var(--serif); font-weight: 700; font-size: 28px; margin: 0 0 8px; color: var(--ink); }
+.modal p { font-size: 14px; line-height: 1.5; color: var(--body); margin: 0 0 16px; }
+.reveal { background: var(--green-pale); border: 1px dashed var(--green-dark); border-radius: 14px; padding: 12px 14px; margin: 2px 0 16px; }
+.reveal-title { font-family: var(--serif); font-weight: 700; font-size: 27px; line-height: 1.1; color: var(--green-dark); }
+.reveal-sub { font-size: 12.5px; color: var(--body); margin-top: 3px; }
+.modal .done {
+  width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 13px;
+  font-family: var(--sans); font-size: 15px; font-weight: 800; color: var(--ink); background: var(--chip);
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal, .sheet-overlay, .offer, .offer::after { animation: none !important; }
+}
