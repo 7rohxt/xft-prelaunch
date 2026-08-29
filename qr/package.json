@@ -1,0 +1,14 @@
+{
+  "name": "xft-qr",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Xing Fu Tang launch QR code generator (vector + high-res PNG).",
+  "scripts": {
+    "start": "node generate.js",
+    "generate": "node generate.js"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4",
+    "sharp": "^0.33.5"
+  }
+}
